@@ -2,8 +2,6 @@ import scrapy
 
 
 class BookItem(scrapy.Item):
-    """Container for the data collected about a single book."""
-
     title = scrapy.Field()
     price = scrapy.Field()
     availability = scrapy.Field()
