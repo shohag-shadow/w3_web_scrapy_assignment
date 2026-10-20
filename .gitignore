@@ -11,3 +11,7 @@ output/*
 data/*
 !output/.gitkeep
 !data/.gitkeep
+books.db
+books.json
+books.csv
+books.xml

@@ -58,9 +58,33 @@ DOWNLOAD_DELAY = 1
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "w3_web_scrapy_assignment.pipelines.W3WebScrapyAssignmentPipeline": 300,
-#}
+ITEM_PIPELINES = {
+    "w3_web_scrapy_assignment.pipelines.CleaningPipeline": 100,
+    "w3_web_scrapy_assignment.pipelines.ValidationPipeline": 200,
+    "w3_web_scrapy_assignment.pipelines.SQLitePipeline": 300,
+}
+
+DATABASE_PATH = "books.db"
+
+FEEDS = {
+    "books.json": {
+        "format": "json",
+        "encoding": "utf8",
+        "indent": 2,
+        "overwrite": True,
+    },
+    "books.csv": {
+        "format": "csv",
+        "encoding": "utf8",
+        "overwrite": True,
+    },
+    "books.xml": {
+        "format": "xml",
+        "encoding": "utf8",
+        "indent": 2,
+        "overwrite": True,
+    },
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
