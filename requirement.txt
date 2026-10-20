@@ -1,0 +1,4 @@
+Scrapy==2.19.0
+scrapyd
+scrapyd-client
+itemadapter

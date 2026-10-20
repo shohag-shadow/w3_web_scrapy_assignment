@@ -1,0 +1,37 @@
+# docker-compose.yml
+#
+# Brings up the Scrapyd daemon that hosts the w3_web_scrapy_assignment
+# project. The egg is baked into the image at build time, so `docker
+# compose up` is enough to schedule crawls - no separate deploy step.
+#
+#   docker compose up -d --build      start (rebuild image first)
+#   docker compose logs -f scrapyd    follow Scrapyd output
+#   docker compose down               stop and remove the container
+
+services:
+  scrapyd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: w3_web_scrapy_assignment-scrapyd:latest
+    container_name: w3_web_scrapy_assignment-scrapyd
+    ports:
+      - "6800:6800"
+    volumes:
+      - ./scrapyd-data:/var/lib/scrapyd
+
+    restart: unless-stopped
+
+    healthcheck:
+      test:
+        - "CMD"
+        - "python"
+        - "-c"
+        - "import urllib.request, sys; sys.exit(0 if urllib.request.urlopen('http://localhost:6800/daemonstatus.json', timeout=3).status == 200 else 1)"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    environment:
+      TZ: "${TZ:-UTC}"
+      DATA_DIR: /var/lib/scrapyd

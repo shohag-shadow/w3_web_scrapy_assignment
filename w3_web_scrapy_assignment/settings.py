@@ -1,3 +1,4 @@
+import os
 # Scrapy settings for w3_web_scrapy_assignment project
 #
 # For simplicity, this file contains only settings considered important or
@@ -64,26 +65,14 @@ ITEM_PIPELINES = {
     "w3_web_scrapy_assignment.pipelines.SQLitePipeline": 300,
 }
 
-DATABASE_PATH = "books.db"
+DATA_DIR = os.environ.get("DATA_DIR", ".")
+
+DATABASE_PATH = os.path.join(DATA_DIR, "books.db")
 
 FEEDS = {
-    "books.json": {
-        "format": "json",
-        "encoding": "utf8",
-        "indent": 2,
-        "overwrite": True,
-    },
-    "books.csv": {
-        "format": "csv",
-        "encoding": "utf8",
-        "overwrite": True,
-    },
-    "books.xml": {
-        "format": "xml",
-        "encoding": "utf8",
-        "indent": 2,
-        "overwrite": True,
-    },
+    os.path.join(DATA_DIR, "books.json"): {"format": "json", "encoding": "utf8", "indent": 2, "overwrite": True},
+    os.path.join(DATA_DIR, "books.csv"):  {"format": "csv",  "encoding": "utf8", "overwrite": True},
+    os.path.join(DATA_DIR, "books.xml"):  {"format": "xml",  "encoding": "utf8", "indent": 2, "overwrite": True},
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
