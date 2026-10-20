@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.egg-info/
+build/
+dist/
+*.egg
+scrapyd-data/
+results-*/
+books.json
+books.csv
+books.xml
+books.db
+.git/
