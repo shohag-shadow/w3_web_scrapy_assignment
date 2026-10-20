@@ -317,8 +317,7 @@ w3_web_scrapy_assignment/
 │
 └── (generated)
     ├── books.{json,csv,xml,db}
-    ├── scrapyd-data/              # volume mount
-    └── results-*/                 # snapshots from test.sh
+    └── scrapyd-data/              # volume mount
 ```
 
 ---
